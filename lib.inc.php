@@ -34,36 +34,19 @@ function afficherJeux($bdd)
     $lignes_resultat = $resultat->rowCount();
     if ($lignes_resultat > 0) {
         while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
-            echo
-            '
-                <li>
-                    <div class="nomdujeu">
-                        <h2>' . $ligne['jeu_nom'] . '</h2>
-                    </div>
-                    <p>
-                        Édité par ' . $ligne['jeu_editeur'] . ' <br>
-                        Pour des parties d\'environ ' . $ligne['jeu_duree_partie'] . ' minutes <br>
-                        Joueurs (mini/maxi) : (' . $ligne['jeu_nb_joueurs_mini'] . '/' . $ligne['jeu_nb_joueurs_maxi'] . ') <br><br>
-
-                        <a style="color: red" href="ajout_panier.php?id=' . $ligne['jeu_code'] . '">Ajouter au panier</a>
-                    </p>
-                    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow>
-                        <ul class="uk-slideshow-items">
-                            <li>
-                                <img src="' . $ligne['jeu_photo1'] . '" alt="" uk-cover>
-                            </li>
-                            <li>
-                                <img src="' . $ligne['jeu_photo2'] . '" alt="" uk-cover>
-                            </li>
-                            <li>
-                                <img src="' . $ligne['jeu_photo3'] . '" alt="" uk-cover>
-                            </li>
-                        </ul>
-                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-                    </div>
-                </li>
-                ';
+            echo '
+            <div class="game">
+                <span class="text-important">
+                ' . $ligne['jeu_nom'] . '
+                </span>
+                <a class="game-link text-important" href="ajout_panier.php?id=' . $ligne['jeu_code'] . '">+</a>
+                <div class="game-content">
+                    <img src="' . $ligne['jeu_photo1'] . '" alt="Photo du kingdomino">
+                    <p>Édité par <strong>' . $ligne['jeu_editeur'] . '</strong></p>
+                    <p>Pour des parties d\'environ <strong>' . $ligne['jeu_duree_partie'] . '</strong></p>
+                    <p>Joueurs (minimum/maximum) : <strong>'. $ligne['jeu_nb_joueurs_mini'] . '/' . $ligne['jeu_nb_joueurs_maxi'] . '</strong></p>
+                </div>
+            </div>';
         }
     } else {
         echo '<p>Pas de résultat !</p>';
