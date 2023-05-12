@@ -27,17 +27,17 @@
                         <a class="uk-badge" href="panier.php">
                             <span>
                                 <i class="fa-solid fa-cart-shopping"></i>';
-                if (isset($_SESSION['panier'])) {
-                    $total = 0;
-                    foreach ($_SESSION['panier'] as $liste) {
-                        $total += $liste['quantite'];
-                    }
-                    if ($total <= 9) {
-                        echo '<span class="uk-badge">' . $total . '</span>';
-                    } else {
-                        echo '9+</span>';
-                    }
-                }
+                                    if (isset($_SESSION['panier'])) {
+                                        $total = 0;
+                                        foreach ($_SESSION['panier'] as $liste) {
+                                            $total += $liste['quantite'];
+                                        }
+                                        if ($total <= 9) {
+                                            echo '<span class="uk-badge">' . $total . '</span>';
+                                        } else {
+                                            echo '9+</span>';
+                                        }
+                                    }
                 echo '</a>';
             }
             ?>

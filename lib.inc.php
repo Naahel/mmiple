@@ -43,8 +43,8 @@ function afficherJeux($bdd)
                 <div class="game-content">
                     <img src="' . $ligne['jeu_photo1'] . '" alt="Photo du kingdomino">
                     <p>Édité par <strong>' . $ligne['jeu_editeur'] . '</strong></p>
-                    <p>Pour des parties d\'environ <strong>' . $ligne['jeu_duree_partie'] . '</strong></p>
-                    <p>Joueurs (minimum/maximum) : <strong>'. $ligne['jeu_nb_joueurs_mini'] . '/' . $ligne['jeu_nb_joueurs_maxi'] . '</strong></p>
+                    <p>Pour des parties d\'environ <strong>' . $ligne['jeu_duree_partie'] . '</strong> minutes</p>
+                    <p>Joueurs (minimum/maximum) : <strong>' . $ligne['jeu_nb_joueurs_mini'] . '/' . $ligne['jeu_nb_joueurs_maxi'] . '</strong></p>
                 </div>
             </div>';
         }
@@ -83,10 +83,13 @@ function afficherPanier($co)
     if (empty($_SESSION['panier'])) { // la panier est vide ?
         $tablePanier = '<p class="erreur">Désolé, votre panier est vide !</p>';
     } else { // sinon le panier contient quelque chose
-        $tablePanier = '<table id="tablePanier">' . "\n";
-        $tablePanier .= '<thead><th>Jeu</th><th>Prix</th>
-    <th>Quantité</th><th>Total</th></thead>' . "\n";
-        $tablePanier .= '</table>' . "\n";
+        $tablePanier = '<table id="tablePanier" border=1>' . "\n";
+        $tablePanier .= '<thead><th>Jeu</th><th>Prix</th><th>Quantité</th><th>Total</th></thead>' . "\n";
+        $tablePanier .= '<tbody>';
+        foreach ($_SESSION['panier'] as $item) {
+            $tablePanier .= '<tr><td>'.$item['nom'] .' </td><td>'. $item['prix'] .' </td><td>'. $item['quantite'].' </td><td>'. $item['prix']*$item['quantite'] .'</td></tr>'. "\n <br>";
+        }
+        $tablePanier .= '</tbody></table>' . "\n";
     }
     return $tablePanier;
 }
